@@ -68,7 +68,7 @@ function LoadMenu(){
 }
 
 function GoToFinal(){
-    $('body').load('/final');
+    window.location.href = '/final';
 }
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -77,6 +77,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const trueButton = document.getElementById('trueButton');
     const falseButton = document.getElementById('falseButton');
     const questionField = document.getElementById('challenge_input');
+    const chlngTrueButton = document.getElementById('trueBtnChlnge');
+    const chlngFalseButton = document.getElementById('falseBtnChlnge');
     let randomNumber;
 
     // Fonction pour gérer le clic sur les checkboxes
@@ -111,7 +113,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-
     // Fonction pour masquer l'élément caché
     function hideHiddenElement() {
         hiddenElement.style.display = 'none';
@@ -135,7 +136,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         setTimeout(function() {
             document.getElementById('message').style.display = 'none';
-        }, 2000);
+        }, 500);
         document.getElementById('score').textContent = "Points cumulés : " + score_equipe;
         $('body').load('/send_score/' + score_equipe);
     }
@@ -157,6 +158,8 @@ document.addEventListener('DOMContentLoaded', function() {
             showMessage(true);
         }
     });
+
+
 });
 
 
@@ -186,7 +189,7 @@ document.querySelectorAll('input[type="checkbox"]').forEach(function(checkbox) {
                     setTimeout(function() { container.querySelector('#div1_img').style.opacity = 1; }, 2);
                     setTimeout(function() {
                         setTimeout(function() { container.querySelector('#div2').style.opacity = 1; }, 2);
-                    }, 500);
+                    }, 2000);
 
                     if (!pzl1) {
                         pzl1 = true;
@@ -545,48 +548,4 @@ function CheckDonePzl(pzl1,pzl2,pzl3,pzl4,pzl5,pzl6,pzl7,pzl8){
         setTimeout(function () {right_container.querySelector('#div4_img').style.opacity = 1;}, 2);
         setTimeout(function () {mid_container.style.opacity = 1;}, 2);
     }
-}
-
-function ShowChallenge(i){
-    const hiddenElement = document.getElementById('question_chlnge');
-    hiddenElement.style.display = 'flex';
-    document.getElementById("q1").style.visibility = "hidden";
-    document.getElementById("q2").style.visibility = "hidden";
-    document.getElementById("q3").style.visibility = "hidden";
-
-    if (i === 1){
-        document.getElementById('challenge_input').textContent = "(True ∧ False) ∨ (¬True ⊕ True)) ∧ (False ∨ ¬(True ∧ False) =";
-    } else if (i === 2){
-        document.getElementById('challenge_input').textContent = "((True ∨ False) ∧ ¬(True ⊕ False)) ∧ (¬True ∨ (False ∧ ¬True)) =";
-    } else if (i === 3){
-        document.getElementById('challenge_input').textContent = "((True ∨ ¬(False ∧ True)) ⊕ (¬(True ∨ False) ∨ (True ∧ False))) ∧ True =";
-    }
-}
-
-document.getElementById("trueBtnChlnge").addEventListener('click', function() {
-    showMessageChlnge(true);
-});
-
-document.getElementById("falseBtnChlnge").addEventListener('click', function() {
-    showMessageChlnge(false);
-});
-
-function showMessageChlnge(b) {
-    const hiddenElement = document.getElementById('question_chlnge');
-    hiddenElement.style.visibility = 'hidden';
-    document.getElementById('final_message').style.display = 'flex';
-    if (b) {
-        document.getElementById('final_message').style.backgroundColor = "greenyellow"
-        document.getElementById('message_content').textContent = "CORRECT ! [+5 pt]";
-        score_equipe = score_equipe + 5;
-    } else {
-        document.getElementById('final_message').style.backgroundColor = "lightcoral"
-        document.getElementById('message_content').textContent = "INCORRECT !";
-    }
-    $('body').load('/send_score/' + score_equipe);
-    setTimeout(function () {
-        $('body').load('/classement');
-        }, 8000);
-
-
 }
