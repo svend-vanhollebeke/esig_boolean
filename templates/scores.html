@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Classement Boolean</title>
+    <link rel="stylesheet" href="{% static 'bool.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>function preventBack() {window.history.forward();}
+        setTimeout("preventBack()", 0);
+        window.onunload = function () { null };</script>
+</head>
+<body>
+
+    <br><br><h3 style="margin:auto; width: 80%; color: red; font-size: 24px; font-weight: bolder; background-color: #1f1c32; border: gray 2px solid; border-radius: 5px">Derniers scores</h3>
+    <br><br><br><div id="scores">
+        <br>
+        <table>
+            <tr id="header_list">
+                <td>Equipe</td><td>Date</td>
+                <td>Score</td></tr>
+            {% for team in all_teams %}
+                <tr class="team">
+                    <td>{{ team.nom }}</td>
+                    <td>le {{ team.heure.day }}.{{ team.heure.month }} à {{ team.heure.hour }}:{{ team.heure.minute }} </td>
+                    <td>{{ team.score }} points</td>
+                </tr>
+            {% endfor %}
+        </table>
+    <br><br>
+    </div><br><br><br>
+    <a href="#" onclick="LoadMenu()" style="text-decoration: none; font-weight: bolder; font-size: x-large; color: yellow">QUITTER</a>
+
+
+</body>
+<script src="{% static 'javascript.js' %}"></script>
+
+</html>

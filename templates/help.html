@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Instructions</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+<h3 style="color:orange; margin-top: -2%; margin-bottom: 0; font-size: xxx-large">Instructions</h3>
+    <div id="help_content">
+        <div class="content">
+            <h3 style="color:orange; margin-top: -2%; margin-bottom: 0;text-align: center">Suivi :</h3><br>
+            <span class="highlighted" style="color: yellow">Votre objectif : réactiver le système !</span><br><br>
+
+            <u>1)</u> Entrez le nom de votre équipe, puis entrez dans le système.<br><br>
+            <u>2)</u> Une à une, des formules s'afficheront. Faites en sorte qu'elles soient strictement <span class="highlighted">Vraies</span>.<br><br>
+            <u>3)</u> Décodez les différentes formules booléennes.<br><br>
+            <u>4)</u> Attention aux questions du système !<br><br>
+            <u>5)</u> Pour quitter, terminez le jeu ou appuyez sur le bouton <span class="highlighted">Quitter</span>.<br><br>
+
+
+        </div>
+        <div class="content">
+            <h3 style="color:orange; margin-top: -2%; margin-bottom: 0; text-align: center">Attaques du Système :</h3><br>
+            Pendant votre activité, <span class="highlighted">le système vous interrogera aléatoirement</span> à propos de la logique booléenne.<br><br>
+            Prenez bien le temps de répondre correctement aux questions !<br><br>
+            > Si vous échouez : <span class="highlighted">vous perderez un point, mais pas au delà de 0.</span><br>
+            > Si vous répondez juste : <span class="highlighted">Vous ne perdez, ni ne gagnez aucun point.</span><br>
+            > Tandis que, à chaque niveau réussi : <span class="highlighted">vous gagnez un point.</span><br>
+            > Essayez de répondre au mieux aux interrogations du système pour éviter de perdre vos points gagnés !
+        </div>
+        <div class="content">
+            <h3 style="color:orange; margin-top: -2%; margin-bottom: 0;text-align: center">La logique booléenne :</h3><br>
+            Il y a un total de <span class="highlighted">8 formules</span> à résoudre !<br>
+            Interagissez avec <span class="highlighted">les checkboxes affichées à l'écran</span> : <input type="checkbox" style="transform: scale(1.5);"/> <input type="checkbox" checked style="transform: scale(1.5);"/><br><br>
+            Vous pouvez pour cette activité vous munir d'un papier et de quoi écrire pour vous aider.<br>
+            Les différents symboles que vous verrez sont : <br>
+            > Le <span class="highlighted">AND</span> ou <span class="highlighted">ET ( ∧ )</span><br>
+            > Le <span class="highlighted">OR</span> ou <span class="highlighted">OU ( ∨ )</span><br>
+            > Le <span class="highlighted">XOR</span> ou <span class="highlighted">OU EXCLUSIF ( ⊕ )</span><br>
+            > Et la négation <span class="highlighted">NOT</span> ou <span class="highlighted">NON/NEGATIF ( ¬ )</span><br><br>
+
+            Vous constaterez que vous êtes laissés avec peu d'informations concernant les opérateurs booléens.<br>
+            <span class="highlighted">C'est à vous</span> de découvrir leurs caractéristiques dans cette activité !<br>
+            Notez cependant qu'il vous est possible de <span class="highlighted">demander de l'aide à l'enseignant en classe</span>,
+            qui a des indices bien précis à vous transmettre.<br><br>
+
+            Enfin, le meilleur conseil pour cette activité : <span class="highlighted">essayez différentes combinaisons, et notez vos observations.</span><br><br>
+
+            <span class="highlighted" style="color: yellow">Bonne chance !</span>
+
+        </div>
+    </div>
+    <a href="{% url 'menu' %}">Retour</a>
+</body>
+</html>

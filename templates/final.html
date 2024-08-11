@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Classement Boolean</title>
+    <link rel="stylesheet" href="{% static 'bool.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>function preventBack() {window.history.forward();}
+        setTimeout("preventBack()", 0);
+        window.onunload = function () { null };</script>
+</head>
+<body>
+    <div style="padding: 30px; color: yellow; font-weight: bolder; font-size: 200%; text-align: center; ">
+        Choisir un challenge final</div>
+    <div id="panel">
+        <div id="q1" class="chlnge">
+            <h3>Challenge final 1</h3>
+            <input type="button" value="Choisir" alt="choice1" onclick="ShowChallenge(1)"/>
+        </div>
+
+        <div id="q2" class="chlnge">
+            <h3>Challenge final 2</h3>
+            <input type="button" value="Choisir" alt="choice2" onclick="ShowChallenge(2)"/>
+        </div>
+
+        <div id="q3" class="chlnge">
+            <h3>Challenge final 3</h3>
+            <input type="button" value="Choisir" alt="choice3" onclick="ShowChallenge(3)"/>
+        </div>
+    </div>
+    <div id="question_chlnge">
+        <div id="question_chlnge-content">
+            <p id="challenge">Quel est le résultat de : </p>
+            <p id="challenge_input"></p>
+            <div>
+                <button id="trueBtnChlnge">True</button>
+                <button id="falseBtnChlnge">False</button>
+            </div>
+        </div>
+    </div>
+    <div id="final_message">
+        <label id="message_content"></label>
+        <p>Félicitation vous avez réussi à relancer le système ! <br>
+            Allez auprès de l'enseignant avec votre nom de groupe pour qu'il puisse voir votre classement.<br>
+        </p>
+    </div>
+    <a href="#" onclick="LoadMenu()" style="text-decoration: none; font-weight: bolder; font-size: x-large; color: yellow">QUITTER</a>
+</body>
+<script src="{% static 'javascript.js' %}"></script>
+</html>

@@ -1,0 +1,232 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BOOLEAN</title>
+    <link rel="stylesheet" href="{% static 'bool.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>function preventBack() {window.history.forward();}
+        setTimeout("preventBack()", 0);
+        window.onunload = function () { null };</script>
+</head>
+<body>
+    <h1>RÉACTIVEZ LE SYSTÈME</h1><h3 id="score">Points cumulés : </h3>
+    <div id="screen">
+        <div id="container_left">
+            <div id="div1">
+                <input type="checkbox" id="chk1">
+                <label>∨</label>
+                <input type="checkbox" id="chk2">
+                <label>∨</label>
+                <input type="checkbox" id="chk3">
+                <label>∨</label>
+                <input type="checkbox" id="chk4">
+                <label>∨</label>
+                <input type="checkbox" id="chk5">
+                <label>∨</label>
+                <input type="checkbox" id="chk6">
+                <label>∨</label>
+                <input type="checkbox" id="chk7">
+                <label>∨</label>
+                <input type="checkbox" id="chk8">
+            </div>
+            <div id="div1_img"></div>
+            <div id="div2">
+                <input type="checkbox" id="chk1">
+                <label>∧</label>
+                <input type="checkbox" id="chk2">
+                <label>∧</label>
+                <input type="checkbox" id="chk3">
+                <label>∧</label>
+                <input type="checkbox" id="chk4">
+                <label>∧</label>
+                <input type="checkbox" id="chk5">
+                <label>∧</label>
+                <input type="checkbox" id="chk6">
+                <label>∧</label>
+                <input type="checkbox" id="chk7">
+                <label>∧</label>
+                <input type="checkbox" id="chk8">
+            </div>
+            <div id="div2_img"></div>
+            <div id="div3">
+                <label class="parenthese">(</label>
+                <input type="checkbox" id="chk1">
+                <label>∨</label>
+                <input type="checkbox" id="chk2">
+                <label class="parenthese">)</label>
+                <label>∨</label>
+                <label class="parenthese">(</label>
+                <input type="checkbox" id="chk3">
+                <label>∧</label>
+                <input type="checkbox" id="chk4">
+                <label class="parenthese">)</label>
+                <label>∨</label>
+                <label class="parenthese">(</label>
+                <input type="checkbox" id="chk5">
+                <label>∨</label>
+                <input type="checkbox" id="chk6">
+                <label class="parenthese">)</label>
+                <label>∨</label>
+                <label class="parenthese">(</label>
+                <input type="checkbox" id="chk7">
+                <label>∧</label>
+                <input type="checkbox" id="chk8">
+                <label class="parenthese">)</label>
+            </div>
+            <div id="div3_img"></div>
+            <div id="div4">
+                <label class="parenthese">(</label>
+                <input type="checkbox" id="chk1">
+                <label>∨</label>
+                <input type="checkbox" id="chk2">
+                <label class="parenthese">)</label>
+                <label>∧</label>
+                <label class="parenthese">(¬</label>
+                <input type="checkbox" id="chk3">
+                <label>∧</label>
+                <input type="checkbox" id="chk4">
+                <label class="parenthese">)</label>
+                <label>∧</label>
+                <label class="parenthese">(</label>
+                <input type="checkbox" id="chk5">
+                <label>∨</label>
+                <input type="checkbox" id="chk6">
+                <label class="parenthese">)</label>
+                <label>∧</label>
+                <label class="parenthese">(</label>
+                <input type="checkbox" id="chk7">
+                <label>∧</label>
+                <input type="checkbox" id="chk8">
+                <label class="parenthese">)</label>
+            </div>
+            <div id="div4_img"></div>
+        </div>
+        <div onclick="GoToFinal()" id="container_mid" style="transition: opacity 1s ease-in-out; opacity: 0;"></div>
+        <div id="container_right">
+            <div id="div1" style="transition: opacity 1s ease-in-out; opacity: 0;">
+                <label class="parenthese">(</label>
+                <input type="checkbox" id="chk1">
+                <label>∨</label>
+                <input type="checkbox" id="chk2">
+                <label class="parenthese">)</label>
+                <label>∧</label>
+                <label class="parenthese">(</label>
+                <input type="checkbox" id="chk3">
+                <label>∨</label>
+                <input type="checkbox" id="chk4">
+                <label class="parenthese">)</label>
+                <label>∧</label>
+                <label class="parenthese">(</label>
+                <input type="checkbox" id="chk5">
+                <label>∨</label>
+                <input type="checkbox" id="chk6">
+                <label class="parenthese">)</label>
+                <label>∧</label>
+                <label class="parenthese">(</label>
+                <input type="checkbox" id="chk7">
+                <label>∨</label>
+                <input type="checkbox" id="chk8">
+                <label class="parenthese">)</label>
+            </div>
+            <div id="div1_img"></div>
+            <div id="div2">
+                <label class="parenthese">(</label>
+                <input type="checkbox" id="chk1">
+                <label>⊕</label>
+                <input type="checkbox" id="chk2">
+                <label class="parenthese">)</label>
+                <label>∧</label>
+                <label class="parenthese">(</label>
+                <input type="checkbox" id="chk3">
+                <label>⊕</label>
+                <input type="checkbox" id="chk4">
+                <label class="parenthese">)</label>
+                <label>∧</label>
+                <label class="parenthese">¬</label>
+                <label class="parenthese">(</label>
+                <input type="checkbox" id="chk5">
+                <label>⊕</label>
+                <input type="checkbox" id="chk6">
+                <label class="parenthese">)</label>
+                <label>∧</label>
+                <label class="parenthese">(</label>
+                <input type="checkbox" id="chk7">
+                <label>⊕</label>
+                <input type="checkbox" id="chk8">
+                <label class="parenthese">)</label>
+            </div>
+            <div id="div2_img"></div>
+            <div id="div3">
+                <label class="parenthese">¬</label>
+                <input type="checkbox" id="chk1">
+                <label>∧</label>
+                <input type="checkbox" id="chk2">
+                <label>∧</label>
+                <label class="parenthese">¬</label>
+                <input type="checkbox" id="chk3">
+                <label>∧</label>
+                <input type="checkbox" id="chk4">
+                <label>∧</label>
+                <label class="parenthese">¬(</label>
+                <input type="checkbox" id="chk5">
+                <label>∧</label>
+                <label class="parenthese">¬</label>
+                <input type="checkbox" id="chk6">
+                <label>∧</label>
+                <input type="checkbox" id="chk7">
+                <label class="parenthese">)</label>
+                <label>∧</label>
+                <label class="parenthese"></label>
+                <input type="checkbox" id="chk8">
+            </div>
+            <div id="div3_img"></div>
+            <div id="div4">
+                <label class="parenthese">(</label>
+                <label class="parenthese">¬</label>
+                <label class="parenthese">(</label>
+                <label class="parenthese">¬</label>
+                <input type="checkbox" id="chk1">
+                <label>⊕</label>
+                <input type="checkbox" id="chk2">
+                <label class="parenthese">)</label>
+                <label>∧</label>
+                <input type="checkbox" id="chk3">
+                <label class="parenthese">)</label>
+                <label>∧</label>
+                <label class="parenthese">(</label>
+                <label class="parenthese">(</label>
+                <input type="checkbox" id="chk4">
+                <label>∨</label>
+                <input type="checkbox" id="chk5">
+                <label>∧</label>
+                <input type="checkbox" id="chk6">
+                <label class="parenthese">)</label>
+                <label>⊕</label>
+                <label class="parenthese">(</label>
+                <input type="checkbox" id="chk7">
+                <label>∧</label>
+                <label class="parenthese">¬</label>
+                <input type="checkbox" id="chk8">
+                <label class="parenthese">)</label>
+            </div>
+            <div id="div4_img"></div>
+        </div>
+        <div id="hiddenElement" class="modal">
+            <div class="modal-content">
+                <p id="challenge">Quel est le résultat de : </p>
+                <p id="challenge_input"></p>
+                <div>
+                    <button id="trueButton">True</button>
+                    <button id="falseButton">False</button>
+                </div>
+            </div>
+        </div>
+        <div id="message"><label id="message_content"></label></div>
+    </div>
+<a href="#" onclick="LoadMenu()" style="text-decoration: none; font-weight: bolder; font-size: x-large; color: yellow">QUITTER</a>
+
+</body>
+<script src="{% static 'javascript.js' %}"></script>
+</html>
