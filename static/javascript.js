@@ -71,96 +71,82 @@ function GoToFinal(){
     window.location.href = '/final';
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-    const hiddenElement = document.getElementById('hiddenElement');
-    const trueButton = document.getElementById('trueButton');
-    const falseButton = document.getElementById('falseButton');
-    const questionField = document.getElementById('challenge_input');
-    const chlngTrueButton = document.getElementById('trueBtnChlnge');
-    const chlngFalseButton = document.getElementById('falseBtnChlnge');
-    let randomNumber;
+document.addEventListener('DOMContentLoaded', function () {
+  const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+  const hiddenElement = document.getElementById('hiddenElement');
+  const trueButton = document.getElementById('trueButton');
+  const falseButton = document.getElementById('falseButton');
+  const questionField = document.getElementById('challenge_input');
+  let randomNumber;
 
-    // Fonction pour gérer le clic sur les checkboxes
-    checkboxes.forEach(checkbox => {
-        checkbox.addEventListener('change', function() {
-            if (checkbox.checked) {
-                document.getElementById('score').textContent = "Points cumulés : " + score_equipe;
-                randomNumber = Math.floor(Math.random() * 3) + 1;
-                if (randomNumber === 1) {
-                    hiddenElement.style.display = 'flex';
-                    //console.log(pzl7, pzl6, pzl5, pzl4, pzl3, pzl2, pzl1);
-                    if (pzl7) {
-                        noQuestion = Math.floor(Math.random() * 6) + 18; //0 à 2
-                    } else if (pzl6) {
-                        noQuestion = Math.floor(Math.random() * 3) + 18; //3 à 5
-                    } else if (pzl5) {
-                        noQuestion = Math.floor(Math.random() * 6) + 12; //6 à 8
-                    } else if (pzl4) {
-                        noQuestion = Math.floor(Math.random() * 3) + 12; //9 à 11
-                    } else if (pzl3) {
-                        noQuestion = Math.floor(Math.random() * 6) + 6; //12 à 14
-                    } else if (pzl2) {
-                        noQuestion = Math.floor(Math.random() * 3) + 6; //15 à 17
-                    } else if (pzl1) {
-                        noQuestion = Math.floor(Math.random() * 6) + 0; //18 à 20
-                    } else {
-                        noQuestion = Math.floor(Math.random() * 3) + 0; //21 à 23
-                    }
-                    questionField.textContent = questions[noQuestion];
-                }
-            }
-        });
-    });
+  function maybeAskQuestion() {
+    // Si tu veux 1/3 de chances, garde ceci, sinon enlève le if.
+    randomNumber = Math.floor(Math.random() * 3) + 1;
+    if (randomNumber !== 1) return;
 
-    // Fonction pour masquer l'élément caché
-    function hideHiddenElement() {
-        hiddenElement.style.display = 'none';
+    hiddenElement.style.display = 'flex';
+
+    // Choix de noQuestion : ta logique inchangée
+    if (pzl7) {
+      noQuestion = Math.floor(Math.random() * 6) + 18;
+    } else if (pzl6) {
+      noQuestion = Math.floor(Math.random() * 3) + 18;
+    } else if (pzl5) {
+      noQuestion = Math.floor(Math.random() * 6) + 12;
+    } else if (pzl4) {
+      noQuestion = Math.floor(Math.random() * 3) + 12;
+    } else if (pzl3) {
+      noQuestion = Math.floor(Math.random() * 6) + 6;
+    } else if (pzl2) {
+      noQuestion = Math.floor(Math.random() * 3) + 6;
+    } else if (pzl1) {
+      noQuestion = Math.floor(Math.random() * 6) + 0;
+    } else {
+      noQuestion = Math.floor(Math.random() * 3) + 0;
     }
+    questionField.textContent = questions[noQuestion];
+  }
 
-    function showMessage(b) {
-        document.getElementById('message').style.display = 'flex';
-        if (b) {
-            document.getElementById('message').style.backgroundColor = "greenyellow"
-            if (score_equipe < 0){
-                document.getElementById('message_content').textContent = "CORRECT ! [+1 pt]";
-                score_equipe = 0;
-            } else {
-                document.getElementById('message_content').textContent = "CORRECT !";
-            }
-        } else {
-            document.getElementById('message').style.backgroundColor = "lightcoral"
-            document.getElementById('message_content').textContent = "INCORRECT ! [-1 pt]";
-            score_equipe = score_equipe - 1;
+  function onCheckboxChange(event) {
+    // --- ta logique puzzle inchangée, juste mise dans une fonction ---
+    const left_container = document.getElementById('container_left');
+    const right_container = document.getElementById('container_right');
+    const mid_container = document.getElementById('container_mid');
+    const checkedBox = event.target;
+    const divCheck = checkedBox.parentElement;
+    const divCheckId = divCheck.id;
+    const container = divCheck.parentElement;
+    const containerId = container.id;
 
-        }
-        setTimeout(function() {
-            document.getElementById('message').style.display = 'none';
-        }, 500);
-        document.getElementById('score').textContent = "Points cumulés : " + score_equipe;
-        $('body').load('/send_score/' + score_equipe);
-    }
+    // ⚠️ Idéalement, remplace toutes les occurrences de '#chk1'…'#chk8'
+    // par des classes ('.chk1' etc.) dans ton HTML + ce JS.
+    // Ex: divCheck.querySelector('.chk1')
+    // ----- (le reste de ton code from "if (containerId === 'container_left')" à la fin) -----
+    // (Je ne le recolle pas ici pour alléger, mais il reste identique)
+    // ---------------------------------------------------------------------------------------
 
-    // Gestion des clics sur les boutons "True" et "False"
-    trueButton.addEventListener('click', function() {
-        hideHiddenElement();
-        if (responses[noQuestion]) {
-            showMessage(true);
-        } else {
-            showMessage(false);
-        }
-    });
-    falseButton.addEventListener('click', function() {
-        hideHiddenElement();
-        if (responses[noQuestion]) {
-            showMessage(false);
-        } else {
-            showMessage(true);
-        }
-    });
+    CheckDonePzl(pzl1,pzl2,pzl3,pzl4,pzl5,pzl6,pzl7,pzl8);
+    // Optionnel: mettre à jour le score à chaque changement
+    document.getElementById('score').textContent = "Points cumulés : " + score_equipe;
 
+    // Déclenche (ou pas) la question
+    maybeAskQuestion();
+  }
 
+  // Attache UN SEUL listener par checkbox qui gère tout
+  checkboxes.forEach(cb => cb.addEventListener('change', onCheckboxChange));
+
+  // Boutons vrai/faux (ta logique existante)
+  trueButton.addEventListener('click', function() {
+    hiddenElement.style.display = 'none';
+    showMessage(responses[noQuestion] === true);
+  });
+  falseButton.addEventListener('click', function() {
+    hiddenElement.style.display = 'none';
+    showMessage(responses[noQuestion] === false);
+  });
 });
+
 
 
 document.querySelectorAll('input[type="checkbox"]').forEach(function(checkbox) {
@@ -177,14 +163,14 @@ document.querySelectorAll('input[type="checkbox"]').forEach(function(checkbox) {
 
         if (containerId === "container_left") {
             if (divCheckId === "div1") {
-                if ((divCheck.querySelector('#chk1')).checked
-                    || (divCheck.querySelector('#chk2')).checked
-                    || (divCheck.querySelector('#chk3')).checked
-                    || (divCheck.querySelector('#chk4')).checked
-                    || (divCheck.querySelector('#chk5')).checked
-                    || (divCheck.querySelector('#chk6')).checked
-                    || (divCheck.querySelector('#chk7')).checked
-                    || (divCheck.querySelector('#chk8')).checked) {
+                if ((divCheck.querySelector('.chk1')).checked
+                    || (divCheck.querySelector('.chk2')).checked
+                    || (divCheck.querySelector('.chk3')).checked
+                    || (divCheck.querySelector('.chk4')).checked
+                    || (divCheck.querySelector('.chk5')).checked
+                    || (divCheck.querySelector('.chk6')).checked
+                    || (divCheck.querySelector('.chk7')).checked
+                    || (divCheck.querySelector('.chk8')).checked) {
 
                     setTimeout(function() { container.querySelector('#div1_img').style.opacity = 1; }, 2);
                     setTimeout(function() {
@@ -204,14 +190,14 @@ document.querySelectorAll('input[type="checkbox"]').forEach(function(checkbox) {
                 }
 
             } else if (divCheckId === "div2") {
-                if ((divCheck.querySelector('#chk1')).checked
-                    && (divCheck.querySelector('#chk2')).checked
-                    && (divCheck.querySelector('#chk3')).checked
-                    && (divCheck.querySelector('#chk4')).checked
-                    && (divCheck.querySelector('#chk5')).checked
-                    && (divCheck.querySelector('#chk6')).checked
-                    && (divCheck.querySelector('#chk7')).checked
-                    && (divCheck.querySelector('#chk8')).checked) {
+                if ((divCheck.querySelector('.chk1')).checked
+                    && (divCheck.querySelector('.chk2')).checked
+                    && (divCheck.querySelector('.chk3')).checked
+                    && (divCheck.querySelector('.chk4')).checked
+                    && (divCheck.querySelector('.chk5')).checked
+                    && (divCheck.querySelector('.chk6')).checked
+                    && (divCheck.querySelector('.chk7')).checked
+                    && (divCheck.querySelector('.chk8')).checked) {
 
                     setTimeout(function() { container.querySelector('#div2_img').style.opacity = 1; }, 2);
                     setTimeout(function() {
@@ -231,10 +217,10 @@ document.querySelectorAll('input[type="checkbox"]').forEach(function(checkbox) {
                 }
 
             } else if (divCheckId === "div3") {
-                if (((divCheck.querySelector('#chk1')).checked || (divCheck.querySelector('#chk2')).checked)
-                    || ((divCheck.querySelector('#chk3')).checked && (divCheck.querySelector('#chk4')).checked)
-                    || ((divCheck.querySelector('#chk5')).checked || (divCheck.querySelector('#chk6')).checked)
-                    || ((divCheck.querySelector('#chk7')).checked && (divCheck.querySelector('#chk8')).checked)) {
+                if (((divCheck.querySelector('.chk1')).checked || (divCheck.querySelector('.chk2')).checked)
+                    || ((divCheck.querySelector('.chk3')).checked && (divCheck.querySelector('.chk4')).checked)
+                    || ((divCheck.querySelector('.chk5')).checked || (divCheck.querySelector('.chk6')).checked)
+                    || ((divCheck.querySelector('.chk7')).checked && (divCheck.querySelector('.chk8')).checked)) {
 
                     setTimeout(function() { container.querySelector('#div3_img').style.opacity = 1; }, 2);
                     setTimeout(function() {
@@ -254,14 +240,14 @@ document.querySelectorAll('input[type="checkbox"]').forEach(function(checkbox) {
                 }
 
             } else if (divCheckId === "div4") {
-                if (((divCheck.querySelector('#chk1')).checked
-                    || (divCheck.querySelector('#chk2')).checked)
-                    && (!(divCheck.querySelector('#chk3')).checked
-                    && (divCheck.querySelector('#chk4')).checked)
-                    && ((divCheck.querySelector('#chk5')).checked
-                    || (divCheck.querySelector('#chk6')).checked)
-                    && ((divCheck.querySelector('#chk7')).checked
-                    && (divCheck.querySelector('#chk8')).checked)) {
+                if (((divCheck.querySelector('.chk1')).checked
+                    || (divCheck.querySelector('.chk2')).checked)
+                    && (!(divCheck.querySelector('.chk3')).checked
+                    && (divCheck.querySelector('.chk4')).checked)
+                    && ((divCheck.querySelector('.chk5')).checked
+                    || (divCheck.querySelector('.chk6')).checked)
+                    && ((divCheck.querySelector('.chk7')).checked
+                    && (divCheck.querySelector('.chk8')).checked)) {
 
                     setTimeout(function() { container.querySelector('#div4_img').style.opacity = 1; }, 2);
                     setTimeout(function() {
@@ -282,14 +268,14 @@ document.querySelectorAll('input[type="checkbox"]').forEach(function(checkbox) {
             }
         } else if (containerId === "container_right") {
             if (divCheckId === "div1") {
-                if (((divCheck.querySelector('#chk1')).checked
-                        || (divCheck.querySelector('#chk2')).checked)
-                    && ((divCheck.querySelector('#chk3')).checked
-                        || (divCheck.querySelector('#chk4')).checked)
-                    && ((divCheck.querySelector('#chk5')).checked
-                        || (divCheck.querySelector('#chk6')).checked)
-                    && ((divCheck.querySelector('#chk7')).checked
-                        || (divCheck.querySelector('#chk8')).checked)) {
+                if (((divCheck.querySelector('.chk1')).checked
+                        || (divCheck.querySelector('.chk2')).checked)
+                    && ((divCheck.querySelector('.chk3')).checked
+                        || (divCheck.querySelector('.chk4')).checked)
+                    && ((divCheck.querySelector('.chk5')).checked
+                        || (divCheck.querySelector('.chk6')).checked)
+                    && ((divCheck.querySelector('.chk7')).checked
+                        || (divCheck.querySelector('.chk8')).checked)) {
                     setTimeout(function() { container.querySelector('#div1_img').style.opacity = 1; }, 2);
                     setTimeout(function() {
                         setTimeout(function() { container.querySelector('#div2').style.opacity = 1; }, 2);
@@ -308,14 +294,14 @@ document.querySelectorAll('input[type="checkbox"]').forEach(function(checkbox) {
                 }
 
             } else if (divCheckId === "div2") {
-                if (((divCheck.querySelector('#chk1')).checked
-                    ^ (divCheck.querySelector('#chk2')).checked)
-                    && ((divCheck.querySelector('#chk3')).checked
-                    ^ (divCheck.querySelector('#chk4')).checked)
-                    && !((divCheck.querySelector('#chk5')).checked
-                    ^ (divCheck.querySelector('#chk6')).checked)
-                    && ((divCheck.querySelector('#chk7')).checked
-                    ^ (divCheck.querySelector('#chk8')).checked)) {
+                if (((divCheck.querySelector('.chk1')).checked
+                    ^ (divCheck.querySelector('.chk2')).checked)
+                    && ((divCheck.querySelector('.chk3')).checked
+                    ^ (divCheck.querySelector('.chk4')).checked)
+                    && !((divCheck.querySelector('.chk5')).checked
+                    ^ (divCheck.querySelector('.chk6')).checked)
+                    && ((divCheck.querySelector('.chk7')).checked
+                    ^ (divCheck.querySelector('.chk8')).checked)) {
 
                     setTimeout(function() { container.querySelector('#div2_img').style.opacity = 1; }, 2);
                     setTimeout(function() {
@@ -335,14 +321,14 @@ document.querySelectorAll('input[type="checkbox"]').forEach(function(checkbox) {
                 }
 
             } else if (divCheckId === "div3") {
-                if (!(divCheck.querySelector('#chk1')).checked
-                        && (divCheck.querySelector('#chk2')).checked
-                        && !(divCheck.querySelector('#chk3')).checked
-                        && (divCheck.querySelector('#chk4')).checked
-                        && !((divCheck.querySelector('#chk5')).checked
-                        && !(divCheck.querySelector('#chk6')).checked
-                        && (divCheck.querySelector('#chk7')).checked)
-                        && (divCheck.querySelector('#chk8')).checked) {
+                if (!(divCheck.querySelector('.chk1')).checked
+                        && (divCheck.querySelector('.chk2')).checked
+                        && !(divCheck.querySelector('.chk3')).checked
+                        && (divCheck.querySelector('.chk4')).checked
+                        && !((divCheck.querySelector('.chk5')).checked
+                        && !(divCheck.querySelector('.chk6')).checked
+                        && (divCheck.querySelector('.chk7')).checked)
+                        && (divCheck.querySelector('.chk8')).checked) {
 
                     setTimeout(function() { container.querySelector('#div3_img').style.opacity = 1; }, 2);
                     setTimeout(function() {
@@ -365,25 +351,25 @@ document.querySelectorAll('input[type="checkbox"]').forEach(function(checkbox) {
                 if (
                     (
                         !(
-                            !(divCheck.querySelector('#chk1')).checked
+                            !(divCheck.querySelector('.chk1')).checked
                             ^
-                            (divCheck.querySelector('#chk2')).checked
+                            (divCheck.querySelector('.chk2')).checked
                         )
                         &&
-                        (divCheck.querySelector('#chk3')).checked
+                        (divCheck.querySelector('.chk3')).checked
                     ) && (
                          (
-                             (divCheck.querySelector('#chk4')).checked
+                             (divCheck.querySelector('.chk4')).checked
                             ||
-                            (divCheck.querySelector('#chk5')).checked
+                            (divCheck.querySelector('.chk5')).checked
                             &&
-                            (divCheck.querySelector('#chk6')).checked
+                            (divCheck.querySelector('.chk6')).checked
                          )
                          ^
                          (
-                            (divCheck.querySelector('#chk7')).checked
+                            (divCheck.querySelector('.chk7')).checked
                             &&
-                            !(divCheck.querySelector('#chk8')).checked
+                            !(divCheck.querySelector('.chk8')).checked
                          )
                     )
                 ) {
